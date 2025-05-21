@@ -17,9 +17,7 @@ public class OrderServlet extends HttpServlet {
     public final Map<Integer, Order> orderMap = new HashMap<>();
 
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Тут у справжньому додатку має бути парсинг параметрів з тіла запиту (form-data або параметри)
-        // Для прикладу жорстко створюємо замовлення:
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Product product = new Product(1, "Example Product", 10.0);
         List<Product> products = new ArrayList<>();
         products.add(product);
@@ -33,7 +31,7 @@ public class OrderServlet extends HttpServlet {
     }
 
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         int id = getIdFromPath(req);
         Order order = orderMap.get(id);
 
@@ -55,9 +53,8 @@ public class OrderServlet extends HttpServlet {
     }
 
     @Override
-    public void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         int id = getIdFromPath(req);
-        // Тут теж можна було б парсити запит, але зараз оновимо вручну
         if (orderMap.containsKey(id)) {
             Product newProduct = new Product(2, "Updated Product", 15.0);
             List<Product> newProducts = Collections.singletonList(newProduct);
@@ -71,7 +68,7 @@ public class OrderServlet extends HttpServlet {
     }
 
     @Override
-    public void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         int id = getIdFromPath(req);
         if (orderMap.remove(id) != null) {
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);

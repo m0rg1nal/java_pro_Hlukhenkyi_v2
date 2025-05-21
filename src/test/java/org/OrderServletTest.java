@@ -49,7 +49,7 @@ public class OrderServletTest {
     public void testDoGet_existingOrder() throws IOException, ServletException {
         Product product = new Product(1, "TestProduct", 5.0);
         Order order = new Order(1, new Date(), 5.0, Collections.singletonList(product));
-        servlet.orderMap.put(1, order); // Пряма вставка в карту для тесту
+        servlet.orderMap.put(1, order);
 
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
